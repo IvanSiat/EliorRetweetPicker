@@ -7,20 +7,31 @@ import twitter4j.TwitterException;
 import java.util.Random;
 
 public class EliorRetweetPicker {
-	
-	public static void main (String[] args) throws NumberFormatException, TwitterException {
+
+	public static void main(String[] args) throws NumberFormatException, TwitterException {
 		RetweetPicker();
 	}
 
-	public static void RetweetPicker() throws NumberFormatException, TwitterException {
-		 String statusID = "1254144338814095360";
-		Twitter twit = TwitterFactory.getSingleton();
-	    IDs stat = twit.getRetweeterIds(Long.parseLong(statusID), 75000, 0);
 	
-	    Random rng = new Random();
-	    int pick = rng.nextInt(stat.getIDs().length-1);
-	   
-	    //System.out.println(twit.showUser(stat.getIDs()[pick]).getScreenName());
-	    System.out.println(stat.getIDs().length);
+
+	public static void RetweetPicker() {
+		String statusID = "1255704634821234689";
+		Twitter twit = TwitterFactory.getSingleton();
+		
+		
+		try {
+
+			IDs stat = twit.getRetweeterIds(Long.parseLong(statusID), 75000, 0);
+
+			Random rng = new Random();
+			int pick = rng.nextInt(stat.getIDs().length -1);
+
+			System.out.println(twit.showUser(stat.getIDs()[pick]).getScreenName());
+			System.out.println(stat.getIDs().length);
+
+		} catch (TwitterException e) {
+
+			e.printStackTrace();
+		}
 	}
 }
